@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -23,6 +24,7 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 public class DriveTrain extends SubsystemBase {
   private final WPI_TalonFX rightMasterMotor;
   private final WPI_TalonFX leftMasterMotor;
+  private final WPI_TalonSRX PigeonController;
 
   private final WPI_TalonFX rightSlaveMotor;
   private final WPI_TalonFX leftSlaveMotor;
@@ -40,11 +42,12 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     leftMasterMotor = new WPI_TalonFX(DriveConstants.kLeftMasterPort);
     leftSlaveMotor = new WPI_TalonFX(DriveConstants.kLeftSlave0Port);
+    PigeonController = new WPI_TalonSRX(DriveConstants.kPigeonPort);
 
     rightMasterMotor = new WPI_TalonFX(DriveConstants.kRightMasterPort);
     rightSlaveMotor = new WPI_TalonFX(DriveConstants.kRightSlave0Port);
 
-    pigeon = new PigeonIMU(DriveConstants.kPigeonPort);
+    pigeon = new PigeonIMU(PigeonController);
 
   //Set Electronics To Default
     leftMasterMotor.configFactoryDefault();
@@ -64,7 +67,7 @@ public class DriveTrain extends SubsystemBase {
     right_falcons = new SpeedControllerGroup(rightMasterMotor, rightSlaveMotor);
 
     left_falcons.setInverted(true);
-    right_falcons.setInverted(false);
+    right_falcons.setInverted(true);
 
     m_drive = new DifferentialDrive(left_falcons, right_falcons);
 
