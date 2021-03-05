@@ -98,8 +98,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    left_falcons.setVoltage(leftVolts);
-    right_falcons.setVoltage(-rightVolts);
+    left_falcons.setVoltage(leftVolts * .4);
+    right_falcons.setVoltage(-rightVolts *.4);
     m_drive.feed();
   }  
 
@@ -145,20 +145,21 @@ public class DriveTrain extends SubsystemBase {
 
   // distance in meters
   public double getLeftDistance() {
-    return -1 * leftMasterMotor.getSelectedSensorPosition() * DriveConstants.kWheelDistancePerPulse;
-  }
-
-  // velocity in meters / sec
-  public double getLeftVelocity() {
-    return -1 * leftMasterMotor.getSelectedSensorVelocity() * DriveConstants.kWheelDistancePerPulse;
+    return -1 * leftMasterMotor.getSelectedSensorPosition()*DriveConstants.kEncoderDistancePerPulse;
   }
 
   public double getRightDistance() {
-    return rightMasterMotor.getSelectedSensorPosition() * DriveConstants.kWheelDistancePerPulse;
+    return rightMasterMotor.getSelectedSensorPosition()*DriveConstants.kEncoderDistancePerPulse;
+  }
+
+
+  // velocity in meters / sec
+  public double getLeftVelocity() {
+    return -1 * leftMasterMotor.getSelectedSensorVelocity() * DriveConstants.kEncoderDistancePerPulse;
   }
 
   public double getRightVelocity() {
-    return rightMasterMotor.getSelectedSensorVelocity() * DriveConstants.kWheelDistancePerPulse;
+    return rightMasterMotor.getSelectedSensorVelocity() * DriveConstants.kEncoderDistancePerPulse;
   }
 
   public Pose2d getPose() {
