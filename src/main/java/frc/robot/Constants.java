@@ -32,12 +32,12 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse = ((kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR) / kGearReduction; 
         public static final double kWheelDistancePerPulse = kEncoderDistancePerPulse/ kGearReduction; //DISTANCE PER PULSE OF WHEEL= (OUTER CIRCUMFERENCE OF WHEEL)/(ENCODER CPR*GEAR REDUCTION)
 
-        public static final double ksVolts = 0.22;
-        public static final double kvVoltSecondsPerMeter = 1.98;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.2;
-        public static final double kPDriveVel = 8.5;
+        public static final double ksVolts = 0.668;
+        public static final double kvVoltSecondsPerMeter = 2.35;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.241;
+        public static final double kPDriveVel = 0;   // 2.29
 
-        public static final double kTrackwidthMeters = 0.69;
+        public static final double kTrackwidthMeters = 0.568325;
         public static final DifferentialDriveKinematics kDriveKinematics =
             new DifferentialDriveKinematics(kTrackwidthMeters);
     }
